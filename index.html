@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peaky Draft Ban</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="view active">
+        <h1 class="main-title">Peaky Draft ban</h1>
+
+        <div class="main-container">
+            <div class="platform-toggle">
+                <button class="toggle-btn active" data-platform="mobile">Mobile</button>
+                <button class="toggle-btn" data-platform="pc">PC</button>
+            </div>
+
+            <div class="games-grid">
+                <div class="game-card" onclick="selectGame('mlbb')">
+                    <div class="game-icon mlbb"></div>
+                    <span class="game-name">MLBB</span>
+                </div>
+                <div class="game-card" onclick="selectGame('rov')">
+                    <div class="game-icon rov"></div>
+                    <span class="game-name">ROV</span>
+                </div>
+                <div class="game-card" onclick="selectGame('hok')">
+                    <div class="game-icon hok"></div>
+                    <span class="game-name">HOK Global</span>
+                </div>
+                <div class="game-card" onclick="selectGame('pokemon')">
+                    <div class="game-icon pokemon"></div>
+                    <span class="game-name">Pokemon Unite</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MLBB Draft Page -->
+    <div id="draft-page-mlbb" class="view">
+        <div class="draft-header">
+            <div class="header-left">
+                <div class="game-logo-small mlbb"></div>
+            </div>
+            <div class="header-controls">
+                <div class="control-group">
+                    <label>Start</label>
+                    <button class="control-btn red-btn" onclick="startTimer()">Start</button>
+                </div>
+                <div class="control-group">
+                    <label>Stop</label>
+                    <button class="control-btn red-btn" onclick="stopTimer()">Stop</button>
+                </div>
+                <div class="control-group">
+                    <button class="control-btn red-btn" onclick="resetDraft()">Reset</button>
+                </div>
+                <div class="control-group">
+                    <label>Timer</label>
+                    <div id="timer-display-mlbb" class="timer-display">00:00</div>
+                </div>
+                <div class="control-group">
+                    <label>Game Quantity</label>
+                    <select id="game-quantity-mlbb" class="dropdown-btn">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Game Type</label>
+                    <select id="game-type-mlbb" class="dropdown-btn">
+                        <option value="normal">Normal</option>
+                        <option value="global">Global</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>History</label>
+                    <button class="control-btn red-btn" onclick="showHistory()">History</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="back-btn" onclick="goBack()">Back</button>
+            </div>
+        </div>
+
+        <div class="draft-container">
+            <div class="team-column blue-team">
+                <h2 class="team-title">Blue team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-area">
+                <div class="filters">
+                    <button class="filter-btn active">ALL</button>
+                    <button class="filter-btn">Gold lane</button>
+                    <button class="filter-btn">Support</button>
+                    <button class="filter-btn">Mid lane</button>
+                    <button class="filter-btn">Jungle</button>
+                    <button class="filter-btn">EXP lane</button>
+                </div>
+                <div class="hero-grid" id="hero-grid-mlbb"></div>
+            </div>
+
+            <div class="team-column red-team">
+                <h2 class="team-title">Red team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROV Draft Page -->
+    <div id="draft-page-rov" class="view">
+        <div class="draft-header">
+            <div class="header-left">
+                <div class="game-logo-small rov"></div>
+            </div>
+            <div class="header-controls">
+                <div class="control-group">
+                    <label>Start</label>
+                    <button class="control-btn red-btn" onclick="startTimer()">Start</button>
+                </div>
+                <div class="control-group">
+                    <label>Stop</label>
+                    <button class="control-btn red-btn" onclick="stopTimer()">Stop</button>
+                </div>
+                <div class="control-group">
+                    <button class="control-btn red-btn" onclick="resetDraft()">Reset</button>
+                </div>
+                <div class="control-group">
+                    <label>Timer</label>
+                    <div id="timer-display-rov" class="timer-display">00:00</div>
+                </div>
+                <div class="control-group">
+                    <label>Game Quantity</label>
+                    <select id="game-quantity-rov" class="dropdown-btn">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Game Type</label>
+                    <select id="game-type-rov" class="dropdown-btn">
+                        <option value="normal">Normal</option>
+                        <option value="global">Global</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>History</label>
+                    <button class="control-btn red-btn" onclick="showHistory()">History</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="back-btn" onclick="goBack()">Back</button>
+            </div>
+        </div>
+
+        <div class="draft-container">
+            <div class="team-column blue-team">
+                <h2 class="team-title">Blue team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-area">
+                <div class="filters">
+                    <button class="filter-btn active">ALL</button>
+                    <button class="filter-btn">Jungle</button>
+                    <button class="filter-btn">Slayer</button>
+                    <button class="filter-btn">Mid</button>
+                    <button class="filter-btn">ADC</button>
+                    <button class="filter-btn">Support</button>
+                </div>
+                <div class="hero-grid" id="hero-grid-rov"></div>
+            </div>
+
+            <div class="team-column red-team">
+                <h2 class="team-title">Red team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOK Draft Page -->
+    <div id="draft-page-hok" class="view">
+        <div class="draft-header">
+            <div class="header-left">
+                <div class="game-logo-small hok"></div>
+            </div>
+            <div class="header-controls">
+                <div class="control-group">
+                    <label>Start</label>
+                    <button class="control-btn red-btn" onclick="startTimer()">Start</button>
+                </div>
+                <div class="control-group">
+                    <label>Stop</label>
+                    <button class="control-btn red-btn" onclick="stopTimer()">Stop</button>
+                </div>
+                <div class="control-group">
+                    <button class="control-btn red-btn" onclick="resetDraft()">Reset</button>
+                </div>
+                <div class="control-group">
+                    <label>Timer</label>
+                    <div id="timer-display-hok" class="timer-display">00:00</div>
+                </div>
+                <div class="control-group">
+                    <label>Game Quantity</label>
+                    <select id="game-quantity-hok" class="dropdown-btn">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Game Type</label>
+                    <select id="game-type-hok" class="dropdown-btn">
+                        <option value="normal">Normal</option>
+                        <option value="global">Global</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>History</label>
+                    <button class="control-btn red-btn" onclick="showHistory()">History</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="back-btn" onclick="goBack()">Back</button>
+            </div>
+        </div>
+
+        <div class="draft-container">
+            <div class="team-column blue-team">
+                <h2 class="team-title">Blue team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-area">
+                <div class="filters">
+                    <button class="filter-btn active">ALL</button>
+                    <button class="filter-btn">Jungle</button>
+                    <button class="filter-btn">Clash</button>
+                    <button class="filter-btn">Mid</button>
+                    <button class="filter-btn">Farm</button>
+                    <button class="filter-btn">Support</button>
+                </div>
+                <div class="hero-grid" id="hero-grid-hok"></div>
+            </div>
+
+            <div class="team-column blue-team">
+                <h2 class="team-title">Blue team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pokemon Unite Draft Page -->
+    <div id="draft-page-pokemon" class="view">
+        <div class="draft-header">
+            <div class="header-left">
+                <div class="game-logo-small pokemon"></div>
+            </div>
+            <div class="header-controls">
+                <div class="control-group">
+                    <label>Start</label>
+                    <button class="control-btn red-btn" onclick="startTimer()">Start</button>
+                </div>
+                <div class="control-group">
+                    <label>Stop</label>
+                    <button class="control-btn red-btn" onclick="stopTimer()">Stop</button>
+                </div>
+                <div class="control-group">
+                    <button class="control-btn red-btn" onclick="resetDraft()">Reset</button>
+                </div>
+                <div class="control-group">
+                    <label>Timer</label>
+                    <div id="timer-display-pokemon" class="timer-display">00:00</div>
+                </div>
+                <div class="control-group">
+                    <label>Game Quantity</label>
+                    <select id="game-quantity-pokemon" class="dropdown-btn">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Game Type</label>
+                    <select id="game-type-pokemon" class="dropdown-btn">
+                        <option value="normal">Normal</option>
+                        <option value="global">Global</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>History</label>
+                    <button class="control-btn red-btn" onclick="showHistory()">History</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="back-btn" onclick="goBack()">Back</button>
+            </div>
+        </div>
+
+        <div class="draft-container">
+            <div class="team-column red-team">
+                <h2 class="team-title">Red team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-area">
+                <div class="filters">
+                    <button class="filter-btn active">ALL</button>
+                    <button class="filter-btn">Attacker</button>
+                    <button class="filter-btn">Speedster</button>
+                    <button class="filter-btn">All-Rounder</button>
+                    <button class="filter-btn">Defender</button>
+                    <button class="filter-btn">Supporter</button>
+                </div>
+                <div class="hero-grid" id="hero-grid-pokemon"></div>
+            </div>
+
+            <div class="team-column blue-team">
+                <h2 class="team-title">Blue team</h2>
+                <div class="ban-section">
+                    <h3>Ban</h3>
+                    <div class="slots-row">
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                        <div class="slot ban-slot"></div>
+                    </div>
+                </div>
+                <div class="pick-section">
+                    <h3>Pick</h3>
+                    <div class="pick-slots-vertical">
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                        <div class="slot pick-slot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- History Page -->
+    <div id="history-page" class="view">
+        <div class="history-header">
+            <div class="header-left">
+                <div id="history-game-logo" class="game-logo-small"></div>
+            </div>
+            <div class="history-title">
+                <h1>Draft History</h1>
+            </div>
+            <div class="header-right">
+                <button class="back-btn" onclick="goBackFromHistory()">Back</button>
+            </div>
+        </div>
+
+        <div class="history-content">
+            <div class="pagination-controls">
+                <button id="prev-page-btn" class="control-btn" onclick="prevHistoryPage()" style="display: none;">Previous</button>
+                <span id="page-indicator" class="page-indicator">Page 1</span>
+                <button id="next-page-btn" class="control-btn" onclick="nextHistoryPage()" style="display: none;">Next Page</button>
+            </div>
+
+            <div id="history-grid" class="history-grid">
+                <!-- Game cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+    
+    <!-- Next Game Popup Button -->
+    <button id="next-game-btn" class="next-game-popup" onclick="nextGame()" style="display: none;">
+        Next Game
+    </button>
+</body>
+
+</html>
