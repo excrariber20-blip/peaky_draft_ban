@@ -102,7 +102,6 @@ const heroData = {
             'Gold lane': 'Gold_lane',
             'Support': 'Support'
         },
-        basePath: 'img/mlbb_hero/'
     },
     rov: {
         roles: {
@@ -728,3 +727,4 @@ function prevHistoryPage() {
         renderHistoryPage(1);
     }
 }
+
