@@ -112,19 +112,19 @@ body {
 
 /* Placeholder Colors for Icons */
 .mlbb {
-    background-image: url('img/mlbb.jpg');
+    background-image: url('mlbb.jpg');
 }
 
 .rov {
-    background-image: url('img/rov.png');
+    background-image: url('rov.png');
 }
 
 .hok {
-    background-image: url('img/hok.png');
+    background-image: url('hok.png');
 }
 
 .pokemon {
-    background-image: url('img/pogemon.jpg');
+    background-image: url('pogemon.jpg');
 }
 
 .game-logo-small {
@@ -622,3 +622,4 @@ body {
         box-shadow: 0 8px 35px rgba(102, 126, 234, 0.7);
     }
 }
+
